@@ -23,15 +23,10 @@
 I2C_HandleTypeDef hi2c1;
 
 SD_HandleTypeDef hsd;
-//UART_HandleTypeDef huart4;
-//UART_HandleTypeDef huart1;
-//UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
 uint8_t test_buffer[4]={'A',',','1','B'};
 uint8_t test_buffer1[4]={'C',',','1','B'};
 uint8_t test_buffer2[4]={'D',',','1','B'};
-
-
 
 uint32_t tick_start_test_1 = 0;
 double Temp1_Test =0;
@@ -42,25 +37,15 @@ uint8_t  configRA[3];
 uint8_t configMode[3];
 uint8_t readmode[2];
 double cblong,cblat,cbangle;
-
-
 uint32_t tick_UART_test=0;
 
-
 int8_t hy[2],hx[2],hz[2];
-
-
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SDIO_SD_Init(void);
-
-//static void MX_UART4_Init(void);
-//static void MX_USART1_UART_Init(void);
-//static void MX_USART2_UART_Init(void);
-//static void MX_USART3_UART_Init(void);
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
 int main(void)
@@ -69,9 +54,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-
-
+	
   /* Configure the system clock */
   SystemClock_Config();
 
@@ -97,10 +80,6 @@ int main(void)
   //__HAL_TIM_ENABLE_IT(&TIM_MOTORLEFT_POSITION_Handle, TIM_IT_UPDATE);  
   HAL_TIM_Encoder_Start(&TIM_MOTORRIGHT_POSITION_Handle,TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&TIM_MOTORLEFT_POSITION_Handle,TIM_CHANNEL_ALL);
-  //HAL_TIM_Base_Start_IT(&TIM_MOTORLEFT_POSITION_Handle);
-  //HAL_TIM_Base_Start_IT(&TIM_MOTORRIGHT_POSITION_Handle);
-
-
 
   MX_DMA_Init();
   MX_UART4_Init();
@@ -114,7 +93,6 @@ int main(void)
 		SowingMachine_Control();
   }
 }
-
 
 /** System Clock Configuration
 */
@@ -209,89 +187,6 @@ static void MX_SDIO_SD_Init(void)
 
 }
 
-/* UART4 init function */
-//static void MX_UART4_Init(void)
-//{
-
-//  huart4.Instance = UART4;
-//  huart4.Init.BaudRate = 115200;
-//  huart4.Init.WordLength = UART_WORDLENGTH_8B;
-//  huart4.Init.StopBits = UART_STOPBITS_1;
-//  huart4.Init.Parity = UART_PARITY_NONE;
-//  huart4.Init.Mode = UART_MODE_TX_RX;
-//  huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-//  huart4.Init.OverSampling = UART_OVERSAMPLING_16;
-//  if (HAL_UART_Init(&huart4) != HAL_OK)
-//  {
-//    _Error_Handler(__FILE__, __LINE__);
-//  }
-
-//}
-
-/* USART1 init function */
-//static void MX_USART1_UART_Init(void)
-//{
-
-//  huart1.Instance = USART1;
-//  huart1.Init.BaudRate = 115200;
-//  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-//  huart1.Init.StopBits = UART_STOPBITS_1;
-//  huart1.Init.Parity = UART_PARITY_NONE;
-//  huart1.Init.Mode = UART_MODE_TX_RX;
-//  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-//  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-//  if (HAL_UART_Init(&huart1) != HAL_OK)
-//  {
-//    _Error_Handler(__FILE__, __LINE__);
-//  }
-
-//}
-
-/* USART2 init function */
-//static void MX_USART2_UART_Init(void)
-//{
-
-//  huart2.Instance = USART2;
-//  huart2.Init.BaudRate = 115200;
-//  huart2.Init.WordLength = UART_WORDLENGTH_8B;
-//  huart2.Init.StopBits = UART_STOPBITS_1;
-//  huart2.Init.Parity = UART_PARITY_NONE;
-//  huart2.Init.Mode = UART_MODE_TX_RX;
-//  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-//  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-//  if (HAL_UART_Init(&huart2) != HAL_OK)
-//  {
-//    _Error_Handler(__FILE__, __LINE__);
-//  }
-
-//}
-
-/* USART3 init function */
-//static void MX_USART3_UART_Init(void)
-//{
-
-//  huart3.Instance = USART3;
-//  huart3.Init.BaudRate = 115200;
-//  huart3.Init.WordLength = UART_WORDLENGTH_8B;
-//  huart3.Init.StopBits = UART_STOPBITS_1;
-//  huart3.Init.Parity = UART_PARITY_NONE;
-//  huart3.Init.Mode = UART_MODE_TX_RX;
-//  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-//  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
-//  if (HAL_UART_Init(&huart3) != HAL_OK)
-//  {
-//    _Error_Handler(__FILE__, __LINE__);
-//  }
-
-//}
-
-/** Configure pins as 
-        * Analog 
-        * Input 
-        * Output
-        * EVENT_OUT
-        * EXTI
-*/
  static void MX_GPIO_Init(void)
 {
 
@@ -346,9 +241,6 @@ static void MX_SDIO_SD_Init(void)
 
 }
 
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
